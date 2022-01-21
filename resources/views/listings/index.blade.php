@@ -23,6 +23,15 @@
                         <div class="mt-4">
                             <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{$listing->company}}</h3>
                             <h2 class="text-white title-font text-lg font-medium">{{$listing->title}}</h2>
+                            <p class="mt-1">{{$listing->user->name}}</p>
+                            <p class="mt-1">
+                                @foreach($listing->tags as $tag)
+                                    <a href="{{route('listing.index',['tag'=>$tag->slug])}}"
+                                       class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">
+                                        {{$tag->slug}}
+                                    </a>
+                                @endforeach
+                            </p>
                             <p class="mt-1">{{$listing->created_at->diffForHumans(   )}}</p>
                         </div>
                     </div>
