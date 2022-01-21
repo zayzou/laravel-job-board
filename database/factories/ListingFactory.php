@@ -21,7 +21,6 @@ class ListingFactory extends Factory
             $content .= '<p class="mb-4">' . $this->faker->sentences(rand(5, 10), true) . '</p>';
         }
         return [
-
             "title" => $title,
             "slug" => Str::slug($title) . '-' . rand(1111, 9999),
             "company" => $this->faker->company,
