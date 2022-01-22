@@ -42,4 +42,21 @@ class ListingController extends Controller
         $tags = Tag::orderBy('name')->get();
         return view('listings.index', ['listings' => $listings, 'tags' => $tags]);
     }
+
+    public function show($slug)
+    {
+        $listing = Listing::where("slug", "=", $slug)->firstOrFail();
+        return view('listings.listing', ['listing' => $listing]);
+    }
+
+    public function apply(Request $request, $slug)
+    {
+        $listing = Listing::where("slug", "=", $slug)->firstOrFail();
+        $listing->clicks()
+            ->create([
+                'user_agent' => $request->userAgent(),
+                'ip' => $request->ip()
+            ]);
+        return redirect()->to($listing->apply_link);
+    }
 }
